@@ -1,0 +1,40 @@
+Análise Amortizada - Revisão
+
+Exemplo 1: Fila (duas pilhas, uma de entrada (rear) e outra de saída (front))
+    -> Enfileirar: coloca (empilha) os itens na pilha R.
+    -> Se a pilha F possuir elementos, desenfileira (desempilha) esses elementos. Se F estiver vazia, move os
+        itens de R para F e depois desempilha.
+    -> O custo de desenfileirar varia de acordo com a quantidade de elementos em F.
+
+----- Método do Banqueiro -----
+
+1. Cada operação i possui um custo amortizado Ci <, >, = ao custo real ci
+    -> se Ci > ci, a diferença é armazenada como crédito
+    -> se Ci < ci, a operação retira a diferença no crédito armazenado
+    -> o crédito é provisão para custos futuros
+    -> operações diferentes podem ter custos diferentes
+
+Exemplo: Fila 
+    -> C_enqueue = 1 + 3 = 4 (paga antecipado para desenfileirar)
+    -> C_dequeue = 0
+
+-> perdi mt coisa aqui <-
+
+----- Método do Potencial -----
+
+(i) Energia potencial armazenada na ED que pode ser usada para trabalho
+    -> Considere operaçÕes iniciadas no estado D0
+        -> D0 -> D1 -> D2 -> ... -> Dn 
+              C1    C2    C3     Cn     (Cj = custo real)
+
+    -> Função potencial
+        -> ø: estado de ED -> R+
+                        Di -> ø(Di) "potencial de Di"
+            
+    -> Ci := ci + ø(Di) - ø(D(i-1))
+                  -----------------
+                        DDP 
+
+            ∑(n->i=1)Ci + ø(Dn) - ø(D0)
+
+∆∆∆: ø(Dn) - ø(D0) >= 0
